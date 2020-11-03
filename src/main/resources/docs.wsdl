@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="DocsWSDL"
+             targetNamespace="docs"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:ns="docs"
+             xmlns:tns="docs"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <types>
+        <xsd:schema targetNamespace="docs">
+            <xsd:import namespace="docs" schemaLocation="docs.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <service name="DocsService">
+        <port name="DocsServicePort" binding="tns:DocsServicePortBinding">
+            <soap:address location="http://localhost:8080/zmluvy"/>
+        </port>
+    </service>
+
+    <binding name="DocsServicePortBinding" type="tns:DocsServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="list">
+            <soap:operation/>
+            <input name="request">
+                <soap:body use="literal"/>
+            </input>
+            <output name="response">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <portType name="DocsServicePortType">
+        <operation name="list">
+            <input name="request" message="tns:docsListRequest"/>
+            <output name="response" message="tns:docsListResponse"/>
+        </operation>
+    </portType>
+
+    <message name="docsListResponse">
+        <part name="list" element="ns:docs"/>
+    </message>
+    <message name="docsListRequest"/>
+</definitions>

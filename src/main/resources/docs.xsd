@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+<xs:schema elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="docs"
+           xmlns:tns="docs"
+           version="1.1.0">
+    <xs:element name="docs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="tns:doc" name="doc" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="doc">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="created" type="xs:date"/>
+            <xs:element name="start_date" type="xs:date"/>
+            <xs:element name="end_date" type="xs:date"/>
+            <xs:element name="value" type="xs:float"/>
+            <xs:element name="monthly" type="xs:float"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="life_doc">
+        <xs:complexContent>
+            <xs:extension base="tns:doc">
+                <xs:sequence>
+                    <xs:element name="insured_id" type="xs:long"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="travel_doc">
+        <xs:complexContent>
+            <xs:extension base="tns:life_doc">
+                <xs:sequence>
+                    <xs:element name="validity" type="xs:string"/>
+                    <xs:element name="purpose" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="injury_doc">
+        <xs:complexContent>
+            <xs:extension base="tns:life_doc">
+                <xs:sequence>
+                    <xs:element name="permanent_value" type="xs:float"/>
+                    <xs:element name="death_value" type="xs:float"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>
